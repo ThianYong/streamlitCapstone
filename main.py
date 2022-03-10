@@ -13,11 +13,11 @@ main = MultiPage()
 # Title of the main page
 display = Image.open('images/Logo5.png')
 display = np.array(display)
-# st.image(display, width = 400)
-# st.title("NUS Capstone")
-col1, col2 = st.columns(2)
-col1.image(display, width = 300)
-col2.title("NUS Capstone 2022")
+st.image(display, width = 400)
+st.title("NUS Capstone")
+# col1, col2 = st.columns(2)
+# col1.image(display, width = 300)
+# col2.title("NUS Capstone 2022")
 
 # Add all your application here
 '''
