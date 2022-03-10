@@ -18,7 +18,7 @@ def app():
         """
     )
     ''' Read in the data '''
-    data = pd.read_csv('https://raw.githubusercontent.com/ThianYong/streamlitCapstone/blob/7dc57e0a50c3cc13ba362cf03dbf9c1a93e82223/data/logs.csv')
+    data = pd.read_csv('https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/logs.csv')
     chart = st.line_chart(data)
 
     if st.checkbox('Show Raw Data'):
