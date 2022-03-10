@@ -23,7 +23,7 @@ def app():
     st.write('## ETH Data')
 
     d_parser = lambda x: pd.datetime.strptime(x, '%Y-%m-%d %I-%p')
-    df = pd.read_csv('https://raw.githubusercontent.com/ThianYong/streamlitCapstone/blob/ecaab9bdad93fb1e7b7895a13fa2ef150a314d1e/data/ETH_1h.csv', parse_dates=['Date'], date_parser=d_parser, index_col='Date')
+    df = pd.read_csv('https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/ETH_1h.csv', parse_dates=['Date'], date_parser=d_parser, index_col='Date')
 
     st.write('## Highest - ETH')
     highs = df['High'].resample('D').max()
