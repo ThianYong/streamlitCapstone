@@ -22,7 +22,7 @@ def app():
     st.write('## ETH Data')
 
     d_parser = lambda x: pd.datetime.strptime(x, '%Y-%m-%d %I-%p')
-    df = pd.read_csv('../Project/data/ETH_1h.csv', parse_dates=['Date'], date_parser=d_parser, index_col='Date')
+    df = pd.read_csv('https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/ETH_1h.csv', parse_dates=['Date'], date_parser=d_parser, index_col='Date')
 
     st.write('## Close, High, Low, Volume - ETH')
 
