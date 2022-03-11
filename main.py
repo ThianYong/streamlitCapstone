@@ -5,7 +5,7 @@ from PIL import Image
 
 # Custom imports 
 from multipage import MultiPage
-from pages import page01, page02, page03, page04, page05, data01 # import pages here
+from pages import home, page01, page02, page03, page04, page05, data01 # import pages here
 
 # Create an instance of the app 
 main = MultiPage()
@@ -23,6 +23,7 @@ st.title("NUS Capstone")
 '''
 New pages are to be added here. 
 '''
+main.add_page("Home", home.app)
 main.add_page("Page 1", page01.app)
 main.add_page("Page 2", page02.app)
 main.add_page("Page 3", page03.app)
