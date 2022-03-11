@@ -14,12 +14,10 @@ def app():
     st.write('# This is a Page for Project Secret!')
     st.write('## This is Page 02')
     st.markdown(
-    """
-    Try only, do not follow. 
-    Today is 4 March 2020
-    """
+        """
+        This page is to demo different type of URL link.
+        """
     )
-    st.header("Section 4")
 
 
     st.write('=== To open an URL, click this button ====')
@@ -35,4 +33,3 @@ def app():
     url3 = 'https://www.google.com'
     st.write('[Google](%s)' % url3)
 
-    st.write('=== Open another Page ===')

@@ -7,6 +7,8 @@ def app():
     """
     What is this page for?
     """
+    # url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
+    url = '../Project/data/'
     st.title('Experiments Logs Page') #set the title
 
 
@@ -18,7 +20,7 @@ def app():
         """
     )
     ''' Read in the data '''
-    data = pd.read_csv('https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/logs.csv')
+    data = pd.read_csv(url + 'logs.csv')
     chart = st.line_chart(data)
 
     if st.checkbox('Show Raw Data'):
