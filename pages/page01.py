@@ -10,7 +10,7 @@ def app():
     url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
     # url = '../Project/data/'
 
-    st.title('Page 1%%%%45345') #set the title
+    st.title('Page 1') #set the title
 
     st.write('# This is a Page for Project Secret!')
     st.write('## This is Page 01')

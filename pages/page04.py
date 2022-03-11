@@ -81,6 +81,17 @@ def app():
         COEs for commercial vehicles, which include goods vehicles and buses, rose to S$48,889 from S$46,501.
         
         A total of 2,941 bids were received, with a quota of 1,753 COEs available.
+        
+        Some random content:
+        Premiums for larger and more powerful cars in Category B rose from S$93,590 to S$94,889.
+        
+        For the Open category, which can be used for any vehicle type but end up being used mainly for large cars, prices went up from S$93,102 to S$98,890. This is the highest since January 2013, when premiums closed at S$97,889.
+        
+        Motorcycle premiums closed at a record S$11,400, having risen from S$10,589 in the previous bidding exercise.
+        
+        COEs for commercial vehicles, which include goods vehicles and buses, rose to S$48,889 from S$46,501.
+        
+        A total of 2,941 bids were received, with a quota of 1,753 COEs available.
         """
     )
 
