@@ -5,11 +5,11 @@ import os
 
 #@st.cache
 def app():
-    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
-    # url = '../Project/data/'
-
     """ what is this page for??
     """
+
+    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
+    # url = '../Project/data/'
     st.title('Page 3')
 
     st.write('# This is a Page for Project Secret!')

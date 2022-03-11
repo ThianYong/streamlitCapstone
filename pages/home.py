@@ -5,11 +5,12 @@ st.set_page_config(layout="wide") # set layout to wide for all pages
 
 #@st.cache
 def app():
-    # url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
-    url = '../Project/data/'
     """
     What is this page for?
     """
+    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
+    # url = '../Project/data/'
+
     st.title('HOME') #set the title
 
     st.write('# This is a Page for Project Secret!')
