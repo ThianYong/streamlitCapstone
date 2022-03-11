@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-st.set_page_config(layout="wide") # set layout to wide for all pages
 
 #@st.cache
 def app():
