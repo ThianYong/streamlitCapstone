@@ -18,7 +18,7 @@ def app():
     st.write('## This is The Home Page')
     st.markdown(
     """
-    Explain the project here
+    Explain the project here..
     """
     )
 
