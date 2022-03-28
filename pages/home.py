@@ -22,3 +22,36 @@ def app():
     """
     )
 
+    ### Set Data Set path
+    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
+    # url = '../streamlitCapstone/data/'
+    url_csv = url + '06_experiment_logs_L8_J-5.csv'
+
+    df = pd.read_csv(url_csv)
+    st.dataframe(data=df)
+    chart = st.line_chart(df)
+
+
+    def pretty(s: str) -> str:
+        try:
+            return dict(js="JavaScript")[s]
+        except KeyError:
+            return s.capitalize()
+    @st.cache
+    def get_data():
+        df = pd.read_csv(url_csv)
+        df["num"] = df.num.map(pretty)
+        return df
+
+    # df = get_data()
+
+    st.header("Plot 1")
+
+    all_num = df.num.unique().tolist()
+    nums = st.multiselect(
+        "Numbers", options=all_num, default=all_num
+    )
+    plot_df = df[df.num.isin(nums)]
+    # plot_df["std_mean"] = plot_df
+
+
