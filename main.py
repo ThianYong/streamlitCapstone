@@ -22,7 +22,7 @@ col2.title("NUS Capstone 2022")
 col2.markdown(
     '''
     The National University of Singapore aspires to be a vital community of academics, researchers, staff, students and alumni working together in a spirit of innovation and enterprise for a better world.
-
+    
     Our singular focus on talent will be the cornerstone of a truly great university that is dedicated to quality education, influential research and visionary enterprise, in service of country and society.
     '''
 )
