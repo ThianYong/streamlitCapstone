@@ -5,11 +5,11 @@ from PIL import Image
 
 # Custom imports 
 from multipage import MultiPage
-from pages import home, page01, page02, page03, page04, page05, data01 # import pages here
+from pages import home, page01, page02, page03, page04, page05, data01, page06_plotData# import pages here
 
 # Create an instance of the app 
 main = MultiPage()
-st.set_page_config(layout="wide") # set layout to wide for all pages
+# st.set_page_config(layout="wide") # set layout to wide for all pages
 
 # Title of the main page
 display = Image.open('images/Logo5.png')
@@ -17,7 +17,7 @@ display = np.array(display)
 # st.image(display, width = 400)
 # st.title("NUS Capstone")
 col1, col2 = st.columns(2)
-col1.image(display, width = 400)
+col1.image(display, width = 300)
 col2.title("NUS Capstone 2022")
 col2.markdown(
     '''
@@ -36,6 +36,7 @@ main.add_page("Page 3", page03.app)
 main.add_page("Page 4", page04.app)
 main.add_page("Page 5", page05.app)
 main.add_page('Data 1', data01.app)
+main.add_page('Page 6', page06_plotData.app)
 
 # The main app
 main.run()
