@@ -36,7 +36,7 @@ main.add_page("Page 2", page02.app)
 main.add_page("Page 3", page03.app)
 main.add_page("Page 4", page04.app)
 main.add_page("Page 5", page05.app)
-main.add_page('Data 1', data.app)
+main.add_page('Data', data.app)
 main.add_page('Page 6', page06_plotData.app)
 
 # The main app

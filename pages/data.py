@@ -8,8 +8,8 @@ def app():
     """
     What is this page for?
     """
-    # url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
-    url = '/Users/thianyong/Library/Mobile Documents/com~apple~CloudDocs/Master Study/NUS/Capstone/Project/Capstone Codes/streamlitCapstone/data/'
+    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
+    # url = '/Users/thianyong/Library/Mobile Documents/com~apple~CloudDocs/Master Study/NUS/Capstone/Project/Capstone Codes/streamlitCapstone/data/'
 
     st.title('Application with Ising Model and Experiment Logs') #set the title
 
