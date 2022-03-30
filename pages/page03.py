@@ -32,3 +32,30 @@ def app():
 
     df_plot = df.resample('W').agg({'Close': 'mean', 'High':'max', 'Low': 'min'})
     chart = st.line_chart(df_plot)
+
+    ### Set Data Set path
+    # url = '../streamlitCapstone/data/'
+    url_csv = url + 'ETH_1h.csv'
+
+    st.markdown(
+        """
+        Plotting
+        """
+    )
+
+
+    st.write('Get Data Using @st.cache')
+    @st.cache
+    def get_data():
+        df = pd.read_csv(url_csv, parse_dates=['Date'], date_parser=d_parser, index_col='Date')
+        return df
+
+    df = get_data()
+    st.dataframe(data=df)
+    st.header("Plot 1")
+    df = df.resample('W').agg({'Close': 'mean', 'High':'max', 'Low': 'min'})
+    chart1 = st.line_chart(df)
+
+
+
+
