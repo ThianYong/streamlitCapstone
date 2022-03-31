@@ -6,7 +6,7 @@ from annotated_text import annotated_text
 
 # Custom imports 
 from multipage import MultiPage
-from pages import page01, home, page02, page03, page04, page05, data, page06_plotData# import pages here
+from pages import page01, home, page02, page03, page04, page05, data# import pages here
 
 # Create an instance of the app 
 main = MultiPage()
@@ -37,7 +37,6 @@ main.add_page("Page 3", page03.app)
 main.add_page("Page 4", page04.app)
 main.add_page("Page 5", page05.app)
 main.add_page('Data', data.app)
-main.add_page('Page 6', page06_plotData.app)
 
 # The main app
 main.run()

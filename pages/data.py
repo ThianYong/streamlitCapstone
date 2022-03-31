@@ -2,9 +2,12 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
+import plotly.express as px
 import matplotlib
 from matplotlib.backends.backend_agg import RendererAgg
 import matplotlib.pyplot as plt
+from annotated_text import annotated_text, annotation
+import altair as alt
 
 
 #@st.cache
@@ -56,6 +59,18 @@ def app():
     fig.update_layout(title='Distribution Plot on Time(sec) Taken for Each Iteration for Different Sizes - MLP')
 
     st.plotly_chart(fig, use_container_width=True)
+
+
+    '''
+    Plot the epoch
+    '''
+    hist_data = [df_4['epoch'], df_8['epoch']]
+    group_labels = ['Length = 4', 'Length = 8']
+    fig = ff.create_distplot(hist_data, group_labels)
+    fig.update_layout(title='Distribution Plot on Epoch Taken for Each Iteration for Different Sizes - MLP')
+
+    st.plotly_chart(fig, use_container_width=True)
+
     if st.checkbox('Show Raw Data of Dist Plot Above'):
         st.dataframe(data=df)
 
@@ -75,23 +90,179 @@ def app():
         st.metric('Learning Rate', '0.001')
         st.metric('Stopping Threshold', '0.005')
 
+    ### prepare data for plots
+    df_plot = df_4[{'Cz-Ferro', 'Cz-Antiferro' ,'Mz2-Ferro', 'Mz2-Antiferro', 'Nz-Ferro', 'Nz-Antiferro'}]
+
+    st.write('## Observables')
+    col21, col22, col23, col24= st.columns(4)
+    with col21:
+        st.metric('Size/Length', '4')
+    with col22:
+        annotated_text(
+            ('Cz-Ferro', '', '#A1DCF6', '#000'),
+        )
+        annotated_text(
+            (' Cz-Antiferro', '', '#A1DCF6', '#000'),
+        )
+
+    with col23:
+        annotated_text(
+            (' Mz2-Ferro', '', '#8DF875', '#000'),
+        )
+        annotated_text(
+            (' Mz2-Antiferro', '', '#ACF89B', '#000'),
+        )
+    with col24:
+        annotated_text(
+            (' Nz-Ferro', '', '#E49BF8', '#000'),
+        )
+        annotated_text(
+            (' Nz-Antiferro', '', '#DB70F8', '#000'),
+        )
+    fig = px.box(df_plot)
+    st.plotly_chart(fig)
+
+    ### prepare data for plots
+    df_plot = df_4[{'energy', 'energy_std', 'Energy-Mean', 'Energy-Std'}]
+
+    colors = {
+        'energy': '#A1DCF6',
+        'energy_std': '#A1DCF6',
+        'Energy-Mean': '#8DF875',
+        'Energy-Std': '#ACF89B',
+        }
+
+    st.write('## Observables')
+    col21, col22, col23= st.columns(3)
+    with col21:
+        st.metric('Size/Length', '4')
+    with col22:
+        annotated_text(
+            ('energy', '', '#A1DCF6', '#000'),
+        )
+        annotated_text(
+            (' energy_std', '', '#A1DCF6', '#000'),
+        )
+
+    with col23:
+        annotated_text(
+            (' Energy-Mean', '', '#8DF875', '#000'),
+        )
+        annotated_text(
+            (' Energy-Std', '', '#ACF89B', '#000'),
+        )
+
+    fig = px.box(df_plot)
+    st.plotly_chart(fig)
+
+    '''
+    Length = 8
+    '''
+    ### prepare data for plots
+    df_plot = df_8[{'Cz-Ferro', 'Cz-Antiferro' ,'Mz2-Ferro', 'Mz2-Antiferro', 'Nz-Ferro', 'Nz-Antiferro'}]
+
+    st.write('## Observables')
+    col21, col22, col23, col24= st.columns(4)
+    with col21:
+        st.metric('Size/Length', '8')
+    with col22:
+        annotated_text(
+            ('Cz-Ferro', '', '#A1DCF6', '#000'),
+        )
+        annotated_text(
+            (' Cz-Antiferro', '', '#A1DCF6', '#000'),
+        )
+
+    with col23:
+        annotated_text(
+            (' Mz2-Ferro', '', '#8DF875', '#000'),
+        )
+        annotated_text(
+            (' Mz2-Antiferro', '', '#ACF89B', '#000'),
+        )
+    with col24:
+        annotated_text(
+            (' Nz-Ferro', '', '#E49BF8', '#000'),
+        )
+        annotated_text(
+            (' Nz-Antiferro', '', '#DB70F8', '#000'),
+        )
+    fig = px.box(df_plot)
+    st.plotly_chart(fig)
+    # fig = alt.Chart(df_plot).mark_boxplot(extent='min-max')
+    # st.altair_chart(fig, use_container_width=True)
+
+    ### prepare data for plots
+    df_plot = df_8[{'energy', 'energy_std', 'Energy-Mean', 'Energy-Std'}]
+
+    colors = {
+        'energy': '#A1DCF6',
+        'energy_std': '#A1DCF6',
+        'Energy-Mean': '#8DF875',
+        'Energy-Std': '#ACF89B',
+    }
+
+    st.write('## Observables')
+    col21, col22, col23= st.columns(3)
+    with col21:
+        st.metric('Size/Length', '8')
+    with col22:
+        annotated_text(
+            ('energy', '', '#A1DCF6', '#000'),
+        )
+        annotated_text(
+            (' energy_std', '', '#A1DCF6', '#000'),
+        )
+
+    with col23:
+        annotated_text(
+            (' Energy-Mean', '', '#8DF875', '#000'),
+        )
+        annotated_text(
+            (' Energy-Std', '', '#ACF89B', '#000'),
+        )
+
+    fig = px.box(df_plot)
+    st.plotly_chart(fig)
+
+
+
+    '''
+    box plot not good, yet. 
+
+        st.header("J = -5.0")
+        fig = px.box(df, x='J', y='energy')
+        fig.show()
+    '''
+    st.write('')
+    st.write('')
+    st.write('## Allow Users Interaction ??')
     '''
     To Plot.
     '''
     filter_length = df['length'].unique().tolist()
-    filter_J = df['J'].unique().tolist()
-    filter_selected = st.multiselect('Choose the Length to Plot', filter_length, filter_length)
+    filter_selected = st.radio('Choose the Length', filter_length)
+    if filter_selected == 4:
+        filt = (df['length'] == filter_selected)
+        # selected_df = df[str(filter_selected[0])]
+        st.write(f'Rows: {df[filt].shape[0]}')
+        st.write(f'Columns: {df[filt].shape[1]}')
+        st.dataframe(df[filt])
 
-    matplotlib.use('agg')
-    _lock = RendererAgg.lock ### use backend renderer to display graphs, more fluid.
+    elif filter_selected == 8:
+        filt = (df['length'] == filter_selected)
+        # selected_df = df[str(filter_selected[0])]
+        st.write(f'Rows: {df[filt].shape[0]}')
+        st.write(f'Columns: {df[filt].shape[1]}')
+        st.dataframe(df[filt])
 
-    row0_spacer1, row0_1, row0_spacer2, row0_2, row0_spacer3 = st.columns((0.2, 1, .2, 1, .2))
-    with row0_1, _lock:
-        st.header("Length")
-        fig, ax = plt.subplots(figsize=(5, 5))
-        ax.pie(filter_length, wedgeprops = { 'linewidth' : 7, 'edgecolor' : 'white'})
-
-        #display a white circle in the middle of the pie chart
-        p = plt.gcf()
-        p.gca().add_artist(plt.Circle( (0,0), 0.7, color='white'))
-        st.pyplot(fig)
+    # get the list of columns
+    columns = df.columns.tolist()
+    st.write("#### Select the columns to display:")
+    selected_cols = st.multiselect("", columns)
+    if len(selected_cols) > 0:
+        selected_df = df[selected_cols]
+        st.write(f'Rows: {df.shape[0]}')
+        st.write(f'Columns: {df.shape[1]}')
+        # st.write(df.describe())
+        st.dataframe(selected_df)

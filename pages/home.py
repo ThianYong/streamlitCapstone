@@ -16,7 +16,8 @@ def app():
 
     st.write('## Background')
     annotated_text(
-        ('MAPALUS ', '', '#aaf', '#ffa'),
+        # ('MAPALUS ', '', '#aaf', '#ffa'),
+        'MAPALUS'
         'implements the ',
         ('neural-network quantum states ', '[1] ', '#afa', '#000'),
         'with ',
@@ -24,7 +25,8 @@ def app():
         'and ',
         'Tensorflow 2',
         'library to speed-up the process with general-purpose ',
-        ('graphics processing units (GPU). ', '', '#8CD9FA', '#000'),
+        # ('graphics processing units (GPU). ', '', '#8CD9FA', '#000'),
+        'graphics processing units (GPU)'
         'The implementation is inspired by',
         ('NetKet library ','[2] ','#F6A1F3','#000'),
         '.'
