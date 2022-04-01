@@ -15,7 +15,7 @@ main = MultiPage()
 st.set_page_config(page_title='NUS Capstone 2022', page_icon='🐙') # set the name of the page
 
 # Title of the main page
-display = Image.open('images/Logo5.png')
+display = Image.open('images/Logo2.png')
 display = np.array(display)
 # st.image(display, width = 400)
 # st.title("NUS Capstone")
