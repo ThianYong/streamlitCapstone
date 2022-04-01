@@ -91,20 +91,20 @@ def app():
     We compare the MAPALUS library run on a general-purpose GPUs to a parallel CPUs implementation, for which we use the NetKe  library. 
     At the time of comparison, we are using NetKet version 2.0, which was still mainly written in C++. 
     We have compared both codes with the same set of parameters, using restricted Boltzmann machines with real weights and sampling with the Metropolis algorithm that flips a random spin.  
-    This is illustrated, for reference only, in Figure below where the computation time (in seconds) needed by different numerical strategies to reach the stopping criterion is 
-    plotted as the function of the size of the system N for the one-dimensional Ising model at the quantum phase transition point (J=1.0). 
-    For a system of 128 spins, our library runs about 5 times faster than the NetKet implementation.
     ''')
 
-    col1, col2, col3 = st.columns([1,6,1]) ## no meaning, just to center the picture.
+    col1, col2 = st.columns(2) ## no meaning, just to center the picture.
     with col1:
-        st.write('')
+        st.markdown('''
+            This is illustrated, for reference only, in Figure on the right where the computation time (in seconds) needed by different numerical strategies to reach the stopping criterion is
+        plotted as the function of the size of the system N for the one-dimensional Ising model at the quantum phase transition point (J=1.0).
+        For a system of 128 spins, our library runs about 5 times faster than the NetKet implementation.
+        ''')
     with col2:
         image1 = Image.open('images/home01.png')
         image1 = np.array(image1)
         st.image(image1, caption='Figure name')
-    with col3:
-        st.write('')
+
 
 
 

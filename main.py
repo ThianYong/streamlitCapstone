@@ -3,6 +3,7 @@ import streamlit as st
 import numpy as np
 from PIL import Image
 from annotated_text import annotated_text
+from streamlit_option_menu import option_menu
 
 # Custom imports 
 from multipage import MultiPage
@@ -40,3 +41,29 @@ main.add_page('Data', data.app)
 
 # The main app
 main.run()
+
+
+
+## To change the page navigation method
+# with st.sidebar:
+#     st.write('Option 2')
+# with st.sidebar:
+#     selected = option_menu(
+#         menu_title='Main Menu',
+#         options=['Home', 'Data', 'Contacts'],
+#         icons = ['house', 'book', 'envelope'],
+#         menu_icon='cast',
+#         default_index=0
+#     )
+# if selected == 'Home':
+#     # home.app()
+#     st.title(f'You have selected {selected}')
+#
+# if selected == 'Data':
+#     # data.app()
+#     st.title(f'You have selected {selected}')
+# if selected == 'Contacts':
+#     st.title(f'You have selected {selected}')
+    
+
+

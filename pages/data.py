@@ -20,7 +20,6 @@ def app():
 
     st.title('Application with Ising Model and Experiment Logs') #set the title
 
-
     st.write('#')
     st.markdown(
     """
@@ -64,18 +63,20 @@ def app():
     '''
     Plot the epoch
     '''
-    hist_data = [df_4['epoch'], df_8['epoch']]
-    group_labels = ['Length = 4', 'Length = 8']
-    fig = ff.create_distplot(hist_data, group_labels)
-    fig.update_layout(title='Distribution Plot on Epoch Taken for Each Iteration for Different Sizes - MLP')
-
-    st.plotly_chart(fig, use_container_width=True)
+    # hist_data = [df_4['epoch'], df_8['epoch']]
+    # group_labels = ['Length = 4', 'Length = 8']
+    # fig = ff.create_distplot(hist_data, group_labels)
+    # fig.update_layout(title='Distribution Plot on Epoch Taken for Each Iteration for Different Sizes - MLP')
+    #
+    # st.plotly_chart(fig, use_container_width=True)
 
     ### To highlight certain cell of dataframes
-    val_threshold = 0 # set the value that need to change color
+    val_threshold = 9999 # set the value that need to change color
     def color_df(val):
         if val>=val_threshold:  ## add more condition if need to change more colors
             color = 'red'
+        else:
+            color = ''
         return f'background-color: {color}'
 
     if st.checkbox('Show Raw Data of Dist Plot Above'):
