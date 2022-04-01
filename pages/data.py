@@ -51,7 +51,7 @@ def app():
     df_4 = get_data('MLP_combined_length_4.csv') #, usecols=cols_filt)
     df_8 = get_data('MLP_combined_length_8.csv') #, usecols=cols_filt)
 
-    df = pd.concat([df_4, df_8], ignore_index=True, sort=False) ### combined all into 1 df.
+    df = get_data('MLP_combined.csv') ### combined all into 1 df.
 
     hist_data = [df_4['time'], df_8['time']]
     group_labels = ['Length = 4', 'Length = 8']
@@ -71,8 +71,16 @@ def app():
 
     st.plotly_chart(fig, use_container_width=True)
 
+    ### To highlight certain cell of dataframes
+    val_threshold = 0 # set the value that need to change color
+    def color_df(val):
+        if val>=val_threshold:  ## add more condition if need to change more colors
+            color = 'red'
+        return f'background-color: {color}'
+
     if st.checkbox('Show Raw Data of Dist Plot Above'):
-        st.dataframe(data=df)
+        st.dataframe(df.style.applymap(color_df, subset=['epoch']))
+        # st.dataframe(data=df)
 
     '''
     To display the Observables.
