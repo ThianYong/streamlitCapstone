@@ -8,7 +8,6 @@ from matplotlib.backends.backend_agg import RendererAgg
 import matplotlib.pyplot as plt
 from annotated_text import annotated_text, annotation
 import altair as alt
-import plost
 
 #@st.cache
 def app():
