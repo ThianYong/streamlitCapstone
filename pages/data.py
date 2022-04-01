@@ -71,17 +71,28 @@ def app():
     # st.plotly_chart(fig, use_container_width=True)
 
     ### To highlight certain cell of dataframes
-    val_threshold = 9999 # set the value that need to change color
-    def color_df(val):
-        if val>=val_threshold:  ## add more condition if need to change more colors
-            color = 'red'
-        else:
-            color = ''
-        return f'background-color: {color}'
+    # val_threshold = 9999 # set the value that need to change color
+    # def color_df(val):
+    #     if val>=val_threshold:  ## add more condition if need to change more colors
+    #         color = 'red'
+    #     else:
+    #         color = ''
+    #     return f'background-color: {color}'
 
-    if st.checkbox('Show Raw Data of Dist Plot Above'):
-        st.dataframe(df.style.applymap(color_df, subset=['epoch']))
-        # st.dataframe(data=df)
+    # if st.checkbox('Show Raw Data of Dist Plot Above'):
+    #     # st.dataframe(df.style.applymap(color_df, subset=['epoch']))
+    #     st.dataframe(data=df)
+
+    col1, col2, col3 = st.columns(3)
+    with col1:
+        load = st.button('Show Raw Data')
+    if load:
+        with col2:
+            st.write(f'Rows: {df.shape[0]}')
+        with col3:
+            st.write(f'Columns: {df.shape[1]}')
+        st.dataframe(data=df)
+        # st.dataframe(data=df.style.highlight_max(axis=0))
 
     '''
     To display the Observables.
@@ -251,6 +262,8 @@ def app():
     '''
     filter_length = df['length'].unique().tolist()
     filter_selected = st.radio('Choose the Length', filter_length)
+    load = st.button('Load Data')
+
     if filter_selected == 4:
         filt = (df['length'] == filter_selected)
         # selected_df = df[str(filter_selected[0])]
