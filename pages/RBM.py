@@ -9,7 +9,6 @@ def app():
     RBM
     """
 
-    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
     st.write('Empty Page - RBM')
 
 

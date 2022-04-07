@@ -16,9 +16,6 @@ def app():
     """
     What is this page for?
     """
-    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
-    # url = '/Users/thianyong/Library/Mobile Documents/com~apple~CloudDocs/Master Study/NUS/Capstone/Project/Capstone Codes/streamlitCapstone/data/'
-
     st.title(':computer: Hardware Specification :computer:') #set the title
 
     st.write('#')
@@ -44,14 +41,14 @@ def app():
 
     @st.cache  ### use cache to buffer the data. Improve loading time.
     def get_data(filename):
-        return pd.read_csv(url+filename)
+        return pd.read_csv(filename)
 
     ''' Plot the distribution of time consumed. Read in the data '''
     # cols_filt = ['num', 'epoch', 'time', 'J', 'length']
     # df_4 = get_data('MLP_combined_length_4.csv') #, usecols=cols_filt)
     # df_8 = get_data('MLP_combined_length_8.csv') #, usecols=cols_filt)
 
-    df = get_data('MLP_combined.csv') ### combined all into 1 df.
+    df = get_data('data/MLP_combined.csv') ### combined all into 1 df.
     filt_4 = df['length']==4
     filt_8 = df['length']==8
     filt_16 = df['length']==16

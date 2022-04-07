@@ -27,13 +27,13 @@ def app():
             st.metric('Stopping Threshold', '0.005')
     st.write('---')
     st.title(':clipboard: Table')  # set the title
-    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
+
 
     @st.cache  ### use cache to buffer the data. Improve loading time.
     def get_data(filename):
-        return pd.read_csv(url + filename)
+        return pd.read_csv(filename)
 
-    df = get_data('MLP_combined.csv')
+    df = get_data('data/MLP_combined.csv')
 
     st.sidebar.header('Please Filter Data Here:')
     length = st.sidebar.multiselect(

@@ -26,7 +26,7 @@ def app():
 
     col1, col2, col3 = st.columns([1,3,1])
     with col2:
-        lottie_email = load_lottiefile(url+'lottie/contact.json')
+        lottie_email = load_lottiefile('lottie/contact.json')
         st_lottie(
             lottie_email,
             speed=1,
@@ -56,5 +56,5 @@ def app():
             st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
     ### call the function
-    local_css(url+"style/contactStyle.css")
+    local_css("style/contactStyle.css")
 

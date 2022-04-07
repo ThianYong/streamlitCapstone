@@ -10,8 +10,6 @@ def app():
     """
     What is this page for?
     """
-    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
-    # url = '../Project/data/'
 
     st.title(':house: Home ') #set the title
 
