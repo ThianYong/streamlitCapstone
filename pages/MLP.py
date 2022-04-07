@@ -13,6 +13,19 @@ def app():
     """
     What is this page for?
     """
+    with st.container():
+        col11, col12, col13 = st.columns(3)
+        with col11:
+            st.metric('J', "-5.0 to 5.0")
+            st.metric('H', "1")
+
+        with col12:
+            st.metric('Iteration/J', '10')
+            st.metric('Epoch Cap', '10,000')
+        with col13:
+            st.metric('Learning Rate', '0.001')
+            st.metric('Stopping Threshold', '0.005')
+    st.write('---')
     st.title(':clipboard: Table')  # set the title
     url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
 

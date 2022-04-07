@@ -4,7 +4,7 @@ from annotated_text import annotated_text
 from streamlit_option_menu import option_menu
 
 # Custom imports
-from pages import page01, home, page02, page03, page04, table, data, contacts
+from pages import page01, home, page02, RBM, MLP, hardware, contacts
 
 
 # st.set_page_config(layout="wide") # set layout to wide for all pages
@@ -33,8 +33,8 @@ with st.sidebar:
 with st.sidebar:
     selected = option_menu(
         menu_title='Main Menu',
-        options=['Home', 'Data', 'Page 1','Page 2', 'Page 3', 'Page 4', 'Table', 'Contact Us'],
-        icons = ['house', 'book', 'journal-richtext', 'journal-richtext','journal-richtext','journal-richtext','table', 'envelope'],
+        options=['Home', 'Hardware', 'Page 1','Page 2', 'RBM', 'MLP', 'Contact Us'],
+        icons = ['house', 'pc-display-horizontal', 'journal-richtext', 'journal-richtext','table','table', 'envelope'],
         menu_icon='cast',
         default_index=0
     )
@@ -43,8 +43,8 @@ if selected == 'Home':
     home.app()
     # st.title(f'You have selected {selected}')
 
-if selected == 'Data':
-    data.app()
+if selected == 'Hardware':
+    hardware.app()
     # st.title(f'You have selected {selected}')
 if selected == 'Contact Us':
     contacts.app()
@@ -54,12 +54,10 @@ if selected == 'Page 1':
     page01.app()
 if selected == 'Page 2':
     page02.app()
-if selected == 'Page 3':
-    page03.app()
-if selected == 'Page 4':
-    page04.app()
-if selected == 'Table':
-    table.app()
+if selected == 'RBM':
+    RBM.app()
+if selected == 'MLP':
+    MLP.app()
     
 
 
