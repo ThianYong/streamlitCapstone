@@ -7,8 +7,7 @@ def app():
     #This uses formsubmit. Documentation is here : https://formsubmit.co
     #CSS from W3schools, here: https://www.w3schools.com/howto/howto_css_contact_form.asp
 
-    # url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/'
-    url = '/Users/thianyong/Library/Mobile Documents/com~apple~CloudDocs/Master Study/NUS/Capstone/Project/Capstone Codes/streamlitCapstone/'
+    url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/'
 
     '''
     To do Animation
