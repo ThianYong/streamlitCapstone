@@ -6,13 +6,14 @@ from PIL import Image
 
 #@st.cache
 def app():
+
     """
     What is this page for?
     """
     url = 'https://raw.githubusercontent.com/ThianYong/streamlitCapstone/main/data/'
     # url = '../Project/data/'
 
-    st.title('Home :wave:') #set the title
+    st.title(':house: Home ') #set the title
 
     st.write('## Background')
     annotated_text(
@@ -97,7 +98,7 @@ def app():
         We have compared both codes with the same set of parameters, using restricted Boltzmann machines with real weights and sampling with the Metropolis algorithm that flips a random spin.  
         ''')
 
-        col1, col2 = st.columns(2) ## no meaning, just to center the picture.
+        col1, col2 = st.columns(2)
         with col1:
             st.markdown('''
                 This is illustrated, for reference only, in Figure on the right where the computation time (in seconds) needed by different numerical strategies to reach the stopping criterion is

@@ -7,3 +7,4 @@ numpy
 st-annotated-text
 plotly
 streamlit-option-menu
+streamlit_lottie
