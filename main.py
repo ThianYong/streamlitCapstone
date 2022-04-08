@@ -5,24 +5,35 @@ from streamlit_option_menu import option_menu
 # Custom imports
 from pages import page01, home, page02, RBM, MLP, hardware, contacts
 
-
 # st.set_page_config(layout="wide") # set layout to wide for all pages
 st.set_page_config(page_title='NUS Capstone 2022', page_icon=':panda_face:') # set the name of the page
 
+# Customised the Streamlit Page
+# add this if want to remove header color: header {visibility: hidden;}
+# add this if want to remove the hamburger on top right: #MainMenu {visibility: hidden;}
+hide_st_style = """
+            <style>
+            footer {visibility: hidden;}
+            </style>
+            """
+st.markdown(hide_st_style, unsafe_allow_html=True)
+
 # Title of the main page
 display = Image.open('images/Logo2.png')
-# display = np.array(display)
-# st.image(display, width = 400)
-# st.title("NUS Capstone")
 col1, col2 = st.columns(2)
-col1.image(display, width = 300)
-col2.title("MAPALUS:")
-col2.markdown(
-'''
-#### Neural-Network Quantum States Library with GPU
-'''
-)
-
+with col1:
+    placeholderLeft = st.empty()
+    with placeholderLeft:
+        st.image(display, width = 300)
+with col2:
+    placeholderRight = st.empty()
+    with placeholderRight:
+        st.markdown(
+        '''
+        # MAPALUS:
+        #### Neural-Network Quantum States Library with GPU
+        '''
+        )
 
 
 ## Add all the pages here.
@@ -46,6 +57,8 @@ if selected == 'Hardware':
     hardware.app()
     # st.title(f'You have selected {selected}')
 if selected == 'Contact Us':
+    placeholderLeft.empty()
+    placeholderRight.empty()
     contacts.app()
     # st.title(f'You have selected {selected}')
 
