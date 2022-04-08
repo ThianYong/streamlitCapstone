@@ -1,6 +1,5 @@
 import streamlit as st
 from PIL import Image
-from annotated_text import annotated_text
 from streamlit_option_menu import option_menu
 
 # Custom imports

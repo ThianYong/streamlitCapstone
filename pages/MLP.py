@@ -1,12 +1,6 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
-import plotly.figure_factory as ff
 import plotly.express as px
-import matplotlib
-from matplotlib.backends.backend_agg import RendererAgg
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 
 def app():

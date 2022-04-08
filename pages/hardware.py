@@ -1,14 +1,7 @@
 import streamlit as st
-import numpy as np
 import pandas as pd
 import plotly.figure_factory as ff
-from streamlit_lottie import st_lottie  #need to create free account at lottie
-import json
-import plotly.express as px
-import matplotlib
-from matplotlib.backends.backend_agg import RendererAgg
-import matplotlib.pyplot as plt
-from annotated_text import annotated_text, annotation
+
 
 
 #@st.cache
