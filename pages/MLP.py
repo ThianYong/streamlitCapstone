@@ -47,6 +47,12 @@ def app():
         options=df['J'].unique(),
         default={-5.0, -4.9, -4.8, -4.7}
     )
+    # J1 = st.sidebar.slider(
+    #     'Select the J:',
+    #     min_value=min(df['J'].unique()),
+    #     max_value=max(df['J'].unique()),
+    #     value=(-5.0, -4.5)
+    # )
 
     df_selection = df.query(
         'length == @length & J==@J'
@@ -67,7 +73,6 @@ def app():
     # KPIs
     total_time = int(df_selection['time'].sum())
     average_energy_mean = round(df_selection['Energy-Mean'].mean(), 1)
-    average_energy_mean_star = ":star:" * int(round(average_energy_mean, 0))
     average_energy_std = round(df_selection['Energy-Std'].mean(), 2)
 
     col11, col12, col13 = st.columns(3)
@@ -76,7 +81,7 @@ def app():
         st.subheader(f'{total_time} seconds')
     with col12:
         st.subheader('Average Energy Mean:')
-        st.subheader(f'{average_energy_mean} {average_energy_mean_star}')
+        st.subheader(f'{average_energy_mean}')
     with col13:
         st.subheader('Average Energy Std:')
         st.subheader(f'{average_energy_std}')
@@ -85,16 +90,19 @@ def app():
 
     # ---- Time Bar Chart ---- #
     time_chart = (
-        df_selection.groupby(by=['J']).sum()[['time']].sort_values(by='time')
+        df_selection.groupby(by=['J']).mean()[['time']].sort_values(by='time')
     )
+    time_chart['J'] = time_chart.index.astype(str)
     fig_time_chart = px.bar(
         time_chart,
-        x=time_chart.index,
+        x='J',
         y='time',
         orientation='v',
-        title='<b> Time Consumed</b>',
-        color_discrete_sequence=['#0083B8'] * len(time_chart),
+        title='<b> Average Time Consumed </b>',
+        color_discrete_sequence=['#0083B8'], # * len(time_chart),
         template='plotly_white',
+        labels ={'time': 'Time in Seconds'},
+        text=time_chart['time'].astype(int)
     )
     fig_time_chart.update_layout(
         plot_bgcolor='rgba(0,0,0,0)',
@@ -104,16 +112,17 @@ def app():
     st.plotly_chart(fig_time_chart)
 
     # ---- Energy-STD Bar Chart ---- #
-    time_chart = (
+    energy_chart = (
         df_selection.groupby(by=['J']).sum()[['Energy-Std']].sort_values(by='Energy-Std')
     )
+    energy_chart['J'] = energy_chart.index.astype(str)
     fig_time_chart = px.bar(
-        time_chart,
-        x=time_chart.index,
+        energy_chart,
+        x='J',
         y='Energy-Std',
         orientation='v',
         title='<b> Energy-Std</b>',
-        color_discrete_sequence=['#0083B8'] * len(time_chart),
+        color_discrete_sequence=['#F63366'],
         template='plotly_white',
     )
     fig_time_chart.update_layout(
@@ -124,9 +133,9 @@ def app():
 
     st.plotly_chart(fig_time_chart)
 
-# ---- Put in 2 cols ---- #
-# col21, col22 = st.columns(2)
-# with col21:
-# 	st.plotly_chart(fig_time_chart)
-# with col22:
-# 	st.plotly_chart(fig_time_chart)
+    # ---- Put in 2 cols ---- #
+    # col21, col22 = st.columns(2)
+    # with col21:
+    # 	st.plotly_chart(fig_time_chart)
+    # with col22:
+    # 	st.plotly_chart(fig_time_chart)

@@ -16,13 +16,12 @@ def app():
     """
     What is this page for?
     """
-    st.title(':computer: Hardware Specification :computer:') #set the title
+    st.title(':computer: Hardware Specification') #set the title
 
     st.write('#')
     st.markdown(
     """
     We use the **MAPALUS** library for the application to find the ground state of Ising model.
-    The logs shown below are on google colab.
     """
     )
 

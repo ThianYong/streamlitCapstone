@@ -56,15 +56,5 @@ def app():
         df["num"] = df.num.map(pretty)
         return df
 
-    # df = get_data()
-
-    st.header("Plot 1")
-
-    all_num = df.num.unique().tolist()
-    nums = st.multiselect(
-        "Numbers", options=all_num, default=all_num
-    )
-    plot_df = df[df.num.isin(nums)]
-    # plot_df["std_mean"] = plot_df
 
 
