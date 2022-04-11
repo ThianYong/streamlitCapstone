@@ -41,12 +41,12 @@ def app():
         options=df['J'].unique(),
         default={-5.0, -4.9, -4.8, -4.7}
     )
-    # J1 = st.sidebar.slider(
-    #     'Select the J:',
-    #     min_value=min(df['J'].unique()),
-    #     max_value=max(df['J'].unique()),
-    #     value=(-5.0, -4.5)
-    # )
+    J1 = st.sidebar.slider(
+        'Select the J:',
+        min_value=min(df['J'].unique()),
+        max_value=max(df['J'].unique()),
+        value=(-5.0, -4.5)
+    )
 
     df_selection = df.query(
         'length == @length & J==@J'

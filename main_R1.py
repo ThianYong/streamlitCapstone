@@ -7,7 +7,7 @@ from streamlit_option_menu import option_menu
 
 # Custom imports 
 from multipage import MultiPage
-from pages import page01, home, page02, RBM, page04, MLP, hardware# import pages here
+from pages import overview, home, page02, RBM, page04, MLP, hardware# import pages here
 
 # Create an instance of the app 
 main = MultiPage()
