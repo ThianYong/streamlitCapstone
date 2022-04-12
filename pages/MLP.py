@@ -27,8 +27,10 @@ def app():
     def get_data(filename):
         return pd.read_csv(filename)
 
+
     df = get_data('data/MLP_combined.csv')
 
+    ### --- SideBar --- ###
     st.sidebar.header('Please Filter Data Here:')
     length = st.sidebar.multiselect(
         'Select the Length:',
@@ -52,6 +54,7 @@ def app():
         'length == @length & J==@J'
     )
 
+    ### --- Show Table --- ###
     st.dataframe(df_selection)
 
     col1, col2, col3, col4, col5 = st.columns(5)
