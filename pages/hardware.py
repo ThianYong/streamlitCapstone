@@ -44,12 +44,34 @@ def app():
     filt_4 = df['length']==4
     filt_8 = df['length']==8
     filt_16 = df['length']==16
+    filt_32 = df['length'] ==32
 
-    hist_data = [df[filt_4]['time'], df[filt_8]['time'], df[filt_16]['time']]
-    group_labels = ['Length = 4', 'Length = 8', 'Length = 16']
+    hist_data = [df[filt_4]['time']]#, df[filt_8]['time'], df[filt_16]['time'], df[filt_32]['time']]
+    group_labels = ['Length = 4']#, 'Length = 8', 'Length = 16', 'Length = 32']
     fig = ff.create_distplot(hist_data, group_labels)
     fig.update_layout(title='Distribution Plot on Time(sec) Taken for Each Iteration for Different Sizes - MLP')
 
     st.plotly_chart(fig, use_container_width=True)
+
+    # hist_data = [df[filt_8]['time']]
+    # group_labels = ['Length = 8']
+    # fig = ff.create_distplot(hist_data, group_labels)
+    # fig.update_layout(title='Distribution Plot on Time(sec) Taken for Each Iteration for Different Sizes - MLP')
+    #
+    # st.plotly_chart(fig, use_container_width=True)
+
+    # hist_data = [df[filt_16]['time']]
+    # group_labels = ['Length = 16']
+    # fig = ff.create_distplot(hist_data, group_labels)
+    # fig.update_layout(title='Distribution Plot on Time(sec) Taken for Each Iteration for Different Sizes - MLP')
+
+    # st.plotly_chart(fig, use_container_width=True)
+
+    # hist_data = [df[filt_32]['time']]
+    # group_labels = ['Length = 32']
+    # fig = ff.create_distplot(hist_data, group_labels)
+    # fig.update_layout(title='Distribution Plot on Time(sec) Taken for Each Iteration for Different Sizes - MLP')
+    #
+    # st.plotly_chart(fig, use_container_width=True)
 
 

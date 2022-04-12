@@ -5,7 +5,7 @@ import plotly.express as px
 
 def app():
     """
-    What is this page for?
+    MLP Page
     """
     with st.container():
         col11, col12, col13 = st.columns(3)
@@ -84,7 +84,7 @@ def app():
 
     # ---- Time Bar Chart ---- #
     time_chart = (
-        df_selection.groupby(by=['J']).mean()[['time']].sort_values(by='time')
+        df_selection.groupby(by=['J']).mean()[['time']]#.sort_values(by='time')
     )
     time_chart['J'] = time_chart.index.astype(str)
     fig_time_chart = px.bar(
@@ -107,7 +107,7 @@ def app():
 
     # ---- Energy-STD Bar Chart ---- #
     energy_chart = (
-        df_selection.groupby(by=['J']).sum()[['Energy-Std']].sort_values(by='Energy-Std')
+        df_selection.groupby(by=['J']).sum()[['Energy-Std']]#.sort_values(by='Energy-Std')
     )
     energy_chart['J'] = energy_chart.index.astype(str)
     fig_time_chart = px.bar(
