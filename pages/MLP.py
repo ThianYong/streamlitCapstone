@@ -47,12 +47,14 @@ def app():
         'Select the J:',
         min_value=min(df['J'].unique()),
         max_value=max(df['J'].unique()),
-        value=(-5.0, -4.5)
+        value=(-5.0, -4.5),
+        step=0.1
     )
 
     df_selection = df.query(
         'length == @length & J==@J'
     )
+    st.write(J1)
 
     ### --- Show Table --- ###
     st.dataframe(df_selection)
