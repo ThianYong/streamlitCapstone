@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import plotly.graph_objects as go
 
 #@st.cache
 def app():
@@ -30,10 +31,17 @@ def app():
     df = get_data('data/RBM_combined.csv')
 
     st.sidebar.header('Please Filter Data Here:')
-    length = st.sidebar.multiselect(
+    # length = st.sidebar.multiselect(
+    #     'Select the Length:',
+    #     options=df['length'].unique(),
+    #     default=4
+    # )
+
+    ## Radio button Style
+    length = st.sidebar.radio(
         'Select the Length:',
         options=df['length'].unique(),
-        default=4
+        # default=4
     )
 
     J = st.sidebar.multiselect(
@@ -120,6 +128,25 @@ def app():
     )
 
     st.plotly_chart(fig_time_chart)
+
+    # ---- Error Bars ---- #
+    fig = go.Figure(
+        data=go.Scatter(
+        x=energy_chart['J'],
+        y=energy_chart['Energy-Std'],
+        error_y=dict(
+            type='data', # value of error bar given in data coordinates
+            array=energy_chart['J'],
+            visible=True),
+        )
+    )
+    fig.update_layout(
+        # xaxis=dict(tickmode='linear'),
+        plot_bgcolor='rgba(0,0,0,0)',
+        yaxis=(dict(showgrid=False)),
+    )
+
+    st.plotly_chart(fig)
 
 
 

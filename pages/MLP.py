@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+import altair as alt
 
 
 def app():
@@ -32,10 +33,16 @@ def app():
 
     ### --- SideBar --- ###
     st.sidebar.header('Please Filter Data Here:')
-    length = st.sidebar.multiselect(
+    # length = st.sidebar.multiselect(
+    #     'Select the Length:',
+    #     options=df['length'].unique(),
+    #     default=4
+    # )
+    ## Radio button Style
+    length = st.sidebar.radio(
         'Select the Length:',
         options=df['length'].unique(),
-        default=4
+        # default=4
     )
 
     J = st.sidebar.multiselect(
@@ -43,6 +50,8 @@ def app():
         options=df['J'].unique(),
         default={-5.0, -4.9, -4.8, -4.7}
     )
+
+
     J1 = st.sidebar.slider(
         'Select the J:',
         min_value=min(df['J'].unique()),
@@ -131,6 +140,13 @@ def app():
     )
 
     st.plotly_chart(fig_time_chart)
+
+    st.dataframe(energy_chart)
+    fig_time_chart_alt = alt.Chart(energy_chart,).mark_bar().encode(
+        x='J',
+        y='Energy-Std'
+    )
+    st.altair_chart(fig_time_chart_alt)
 
     # ---- Put in 2 cols ---- #
     # col21, col22 = st.columns(2)
