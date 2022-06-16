@@ -4,6 +4,7 @@ import plotly.express as px
 import altair as alt
 import plotly.graph_objects as go
 import numpy as np
+from datetime import timedelta
 
 
 def app():
@@ -86,14 +87,15 @@ def app():
     st.markdown("##")
 
     # KPIs
-    total_time = int(df_selection['time'].mean())
+    total_time_sec = int(df_selection['time'].mean())
+    total_time = timedelta(seconds=total_time_sec)
     average_energy_mean = round(df_selection['Energy-Mean'].mean(), 1)
     average_energy_std = round(df_selection['Energy-Std'].mean(), 2)
 
     col11, col12, col13 = st.columns(3)
     with col11:
         st.subheader('Average Time:')
-        st.subheader(f'{total_time} seconds')
+        st.subheader(f'{total_time}')
     with col12:
         st.subheader('Average Energy Mean:')
         st.subheader(f'{average_energy_mean}')
