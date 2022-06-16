@@ -131,7 +131,7 @@ def app():
 
     # ---- Energy-STD Bar Chart ---- #
     energy_chart = (
-        df_selection.groupby(by=['J']).sum()[['Energy-Std']]#.sort_values(by='Energy-Std') # mean
+        df_selection.groupby(by=['J']).mean()[['Energy-Std']]#.sort_values(by='Energy-Std') # mean
     )
     energy_chart['J'] = energy_chart.index.astype(str)
     fig_time_chart = px.bar(
