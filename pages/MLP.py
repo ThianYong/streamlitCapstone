@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 import altair as alt
+import plotly.graph_objects as go
+import numpy as np
 
 
 def app():
@@ -45,12 +47,12 @@ def app():
         # default=4
     )
 
-    J = st.sidebar.multiselect(
-        'Select the J:',
-        options=df['J'].unique(),
-        default={-5.0, -4.9, -4.8, -4.7}
-    )
-
+    # MultiSelect not needed.
+    # J = st.sidebar.multiselect(
+    #     'Select the J:',
+    #     options=df['J'].unique(),
+    #     default=df['J'].unique() #{-5.0, -4.9, -4.8, -4.7}
+    # )
 
     J1 = st.sidebar.slider(
         'Select the J:',
@@ -60,10 +62,15 @@ def app():
         step=0.1
     )
 
+    ## Create a list of numbers selected, round the numbers to 1 decimal place
+    J1_list = np.arange(J1[0], J1[1]+0.1, 0.1).tolist()
+    J1_list = [round(num, 1) for num in J1_list]
+    # st.write(J1_list)
+
     df_selection = df.query(
-        'length == @length & J==@J'
+        'length == @length & J == @J1_list'
     )
-    st.write(J1)
+    # st.write(J1)
 
     ### --- Show Table --- ###
     st.dataframe(df_selection)
@@ -79,13 +86,13 @@ def app():
     st.markdown("##")
 
     # KPIs
-    total_time = int(df_selection['time'].sum())
+    total_time = int(df_selection['time'].mean())
     average_energy_mean = round(df_selection['Energy-Mean'].mean(), 1)
     average_energy_std = round(df_selection['Energy-Std'].mean(), 2)
 
     col11, col12, col13 = st.columns(3)
     with col11:
-        st.subheader('Total Time:')
+        st.subheader('Average Time:')
         st.subheader(f'{total_time} seconds')
     with col12:
         st.subheader('Average Energy Mean:')
@@ -121,7 +128,7 @@ def app():
 
     # ---- Energy-STD Bar Chart ---- #
     energy_chart = (
-        df_selection.groupby(by=['J']).sum()[['Energy-Std']]#.sort_values(by='Energy-Std')
+        df_selection.groupby(by=['J']).sum()[['Energy-Std']]#.sort_values(by='Energy-Std') # mean
     )
     energy_chart['J'] = energy_chart.index.astype(str)
     fig_time_chart = px.bar(
@@ -141,12 +148,35 @@ def app():
 
     st.plotly_chart(fig_time_chart)
 
-    st.dataframe(energy_chart)
-    fig_time_chart_alt = alt.Chart(energy_chart,).mark_bar().encode(
-        x='J',
-        y='Energy-Std'
+    # ---- Error Bars ---- #
+    fig = go.Figure(
+        data=go.Scatter(
+            x=energy_chart['J'],
+            y=energy_chart['Energy-Std'],
+            error_y=dict(
+                type='data', # value of error bar given in data coordinates
+                array=energy_chart['J'],
+                visible=True),
+        )
     )
-    st.altair_chart(fig_time_chart_alt)
+    fig.update_layout(
+        # xaxis=dict(tickmode='linear'),
+        plot_bgcolor='rgba(0,0,0,0)',
+        yaxis=(dict(showgrid=False)),
+    )
+
+    st.plotly_chart(fig)
+
+
+
+
+    ## === Another Chart Pattern KIV === #
+    # st.dataframe(energy_chart)
+    # fig_time_chart_alt = alt.Chart(energy_chart,).mark_bar().encode(
+    #     x='J',
+    #     y='Energy-Std'
+    # )
+    # st.altair_chart(fig_time_chart_alt)
 
     # ---- Put in 2 cols ---- #
     # col21, col22 = st.columns(2)
