@@ -63,13 +63,19 @@ def app():
         step=0.1
     )
 
+    G1 = st.sidebar.selectbox(
+        'How would you like to be contacted?',
+        ('Email', 'Home phone', 'Mobile phone'))
+
+    st.sidebar.write('You selected:', G1)
+
     ## Create a list of numbers selected, round the numbers to 1 decimal place
-    J1_list = np.arange(J1[0], J1[1]+0.1, 0.1).tolist()
-    J1_list = [round(num, 1) for num in J1_list]
+    J1 = np.arange(J1[0], J1[1]+0.1, 0.1).tolist()
+    J1 = [round(num, 1) for num in J1]
     # st.write(J1_list)
 
     df_selection = df.query(
-        'length == @length & J == @J1_list'
+        'length == @length & J == @J1'
     )
     # st.write(J1)
 
@@ -128,6 +134,9 @@ def app():
     )
 
     st.plotly_chart(fig_time_chart)
+
+    ## Show table for selected data
+    #st.dataframe(time_chart.assign(hack='').set_index('hack'))
 
     # ---- Energy-STD Bar Chart ---- #
     energy_chart = (

@@ -3,9 +3,9 @@ from PIL import Image
 from streamlit_option_menu import option_menu
 
 # Custom imports
-from pages import overview, home, RBM, MLP, hardware, contacts
+from page import overview, home, RBM, MLP, hardware, contacts
 
-# st.set_page_config(layout="wide") # set layout to wide for all pages
+# st.set_page_config(layout="wide") # set layout to wide for all page
 st.set_page_config(page_title='NUS Capstone 2022', page_icon=':panda_face:') # set the name of the page
 
 # Customised the Streamlit Page
@@ -36,7 +36,7 @@ with col2:
         )
 
 
-## Add all the pages here.
+## Add all the page here.
 ## Icon is using bootstrap.
 with st.sidebar:
     st.write('Page Navigation')
