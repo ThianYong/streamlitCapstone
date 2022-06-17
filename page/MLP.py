@@ -114,7 +114,7 @@ def app():
     st.markdown('---')
 
 
-    # ---- Time Bar Chart ---- #
+    # ---- Ti  me Bar Chart ---- #
     time_chart = (
         df_selection.groupby(by=['J']).mean()[['time']]#.sort_values(by='time')
     )
