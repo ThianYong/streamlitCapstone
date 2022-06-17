@@ -64,10 +64,12 @@ def app():
     )
 
     G1 = st.sidebar.selectbox(
-        'How would you like to be contacted?',
-        ('Email', 'Home phone', 'Mobile phone'))
+        'Select the Graph to be Plotted:',
+        # options=df.columns,
+        options = ['time', 'Energy-Std', 'Cz-Ferro', 'Cz-Antiferro', 'Mz2-Ferro', 'Mz2-Antiferro', 'Mx-Ferro', 'Nz-Ferro', 'Nz-Antiferro', 'std_mean' ]
+    )
 
-    st.sidebar.write('You selected:', G1)
+    # st.sidebar.write('You selected:', G1)
 
     ## Create a list of numbers selected, round the numbers to 1 decimal place
     J1 = np.arange(J1[0], J1[1]+0.1, 0.1).tolist()
@@ -179,20 +181,26 @@ def app():
 
     st.plotly_chart(fig)
 
+    st.write('---- Graph Below Changes based on selection ----')
+    ## ---- Plot by Selection ---- ##
+    select_chart = (
+        df_selection.groupby(by=['J']).mean()[[G1]]
+    )
+    select_chart['J'] = select_chart.index.astype(str)
+    fig_time_chart = px.bar(
+        select_chart,
+        x='J',
+        y=G1,
+        orientation='v',
+        title=G1,
+        color_discrete_sequence=['#F63366'],
+        template='plotly_white',
+        text=round(select_chart[G1], 3)
+    )
+    fig_time_chart.update_layout(
+        # xaxis=dict(tickmode='linear'),
+        plot_bgcolor='rgba(0,0,0,0)',
+        yaxis=(dict(showgrid=False))
+    )
 
-
-
-    ## === Another Chart Pattern KIV === #
-    # st.dataframe(energy_chart)
-    # fig_time_chart_alt = alt.Chart(energy_chart,).mark_bar().encode(
-    #     x='J',
-    #     y='Energy-Std'
-    # )
-    # st.altair_chart(fig_time_chart_alt)
-
-    # ---- Put in 2 cols ---- #
-    # col21, col22 = st.columns(2)
-    # with col21:
-    # 	st.plotly_chart(fig_time_chart)
-    # with col22:
-    # 	st.plotly_chart(fig_time_chart)
+    st.plotly_chart(fig_time_chart)
