@@ -220,7 +220,7 @@ def app():
     # st.write(error_y)
 
     valueError = 25
-    st.write('Error Bar Plot :')
+
     st.write('Value of Error :', valueError, '%')
     fig = go.Figure(
         data=go.Scatter(
