@@ -114,93 +114,131 @@ def app():
     st.markdown('---')
 
 
-    # ---- Ti  me Bar Chart ---- #
-    time_chart = (
-        df_selection.groupby(by=['J']).mean()[['time']]#.sort_values(by='time')
+    # ---- Time Bar Chart ---- #
+    # time_chart = (
+    #     df_selection.groupby(by=['J']).mean()[['time']]#.sort_values(by='time')
+    # )
+    # time_chart['J'] = time_chart.index.astype(str)
+    # fig_time_chart = px.bar(
+    #     time_chart,
+    #     x='J',
+    #     y='time',
+    #     orientation='v',
+    #     title='<b> Average Time Consumed </b>',
+    #     color_discrete_sequence=['#0083B8'], # * len(time_chart),
+    #     template='plotly_white',
+    #     labels ={'time': 'Time in Seconds'},
+    #     text=time_chart['time'].astype(int)
+    # )
+    # fig_time_chart.update_layout(
+    #     plot_bgcolor='rgba(0,0,0,0)',
+    #     yaxis=(dict(showgrid=False))
+    # )
+    # st.plotly_chart(fig_time_chart)
+
+    select_chart = (
+        df_selection.groupby(by=['J']).mean()[[G1]]
     )
-    time_chart['J'] = time_chart.index.astype(str)
-    fig_time_chart = px.bar(
-        time_chart,
+    select_chart['J'] = select_chart.index.astype(str)
+
+    fig_select_chart = px.bar(
+        select_chart,
         x='J',
-        y='time',
+        y=G1,
         orientation='v',
-        title='<b> Average Time Consumed </b>',
-        color_discrete_sequence=['#0083B8'], # * len(time_chart),
+        title=('<b>' + G1 + '</b>'),
+        color_discrete_sequence=['#0083B8'],
         template='plotly_white',
-        labels ={'time': 'Time in Seconds'},
-        text=time_chart['time'].astype(int)
+        text=round(select_chart[G1], 3)
     )
-    fig_time_chart.update_layout(
+    fig_select_chart.update_layout(
+        # xaxis=dict(tickmode='linear'),
         plot_bgcolor='rgba(0,0,0,0)',
         yaxis=(dict(showgrid=False))
     )
 
-    st.plotly_chart(fig_time_chart)
+    st.plotly_chart(fig_select_chart)
 
     ## Show table for selected data
     #st.dataframe(time_chart.assign(hack='').set_index('hack'))
 
     # ---- Energy-STD Bar Chart ---- #
-    energy_chart = (
-        df_selection.groupby(by=['J']).mean()[['Energy-Std']]#.sort_values(by='Energy-Std') # mean
-    )
-    energy_chart['J'] = energy_chart.index.astype(str)
-    fig_time_chart = px.bar(
-        energy_chart,
-        x='J',
-        y='Energy-Std',
-        orientation='v',
-        title='<b> Energy-Std</b>',
-        color_discrete_sequence=['#F63366'],
-        template='plotly_white',
-    )
-    fig_time_chart.update_layout(
-        # xaxis=dict(tickmode='linear'),
-        plot_bgcolor='rgba(0,0,0,0)',
-        yaxis=(dict(showgrid=False))
-    )
+    # energy_chart = (
+    #     df_selection.groupby(by=['J']).mean()[['Energy-Std']]#.sort_values(by='Energy-Std') # mean
+    # )
+    # energy_chart['J'] = energy_chart.index.astype(str)
+    # fig_time_chart = px.bar(
+    #     energy_chart,
+    #     x='J',
+    #     y='Energy-Std',
+    #     orientation='v',
+    #     title='<b> Energy-Std</b>',
+    #     color_discrete_sequence=['#F63366'],
+    #     template='plotly_white',
+    # )
+    # fig_time_chart.update_layout(
+    #     # xaxis=dict(tickmode='linear'),
+    #     plot_bgcolor='rgba(0,0,0,0)',
+    #     yaxis=(dict(showgrid=False))
+    # )
+    #
+    # st.plotly_chart(fig_time_chart)
 
-    st.plotly_chart(fig_time_chart)
+
 
     # ---- Error Bars ---- #
+    error_chart = (
+        df_selection.groupby(by=['J'])[[G1]]
+    )
+
+
+    st.write('Selected Data :' + G1 )
+    col21, col22 = st.columns(2)
+    with col21:
+
+        st.write(
+            'Select Chart: '
+        )
+        st.dataframe(select_chart)
+
+    error_chart = error_chart.mean()[G1]
+
+    error_chart = pd.DataFrame(error_chart)
+    error_chart['J'] = error_chart.index.astype(str)
+
+    with col22:
+
+        st.write(
+            'Error Chart: '
+        )
+        st.dataframe(error_chart)
+
+    error_x = error_chart['J'].tolist()
+    error_y = error_chart[G1].tolist()
+
+    # st.write(error_x)
+    # st.write(error_y)
+
+    valueError = 25
+    st.write('Error Bar Plot :')
+    st.write('Value of Error :', valueError, '%')
     fig = go.Figure(
         data=go.Scatter(
-            x=energy_chart['J'],
-            y=energy_chart['Energy-Std'],
+            x=error_x,
+            y=error_y,
             error_y=dict(
-                type='data', # value of error bar given in data coordinates
-                array=energy_chart['J'],
+                type='percent', #  value of error bar given as percentage of y value
+                value=valueError,
                 visible=True),
         )
     )
+
     fig.update_layout(
         # xaxis=dict(tickmode='linear'),
         plot_bgcolor='rgba(0,0,0,0)',
+        title_text = ('<b>' + G1 + '</b>'),
         yaxis=(dict(showgrid=False)),
     )
 
     st.plotly_chart(fig)
 
-    st.write('---- Graph Below Changes based on selection ----')
-    ## ---- Plot by Selection ---- ##
-    select_chart = (
-        df_selection.groupby(by=['J']).mean()[[G1]]
-    )
-    select_chart['J'] = select_chart.index.astype(str)
-    fig_time_chart = px.bar(
-        select_chart,
-        x='J',
-        y=G1,
-        orientation='v',
-        title=G1,
-        color_discrete_sequence=['#F63366'],
-        template='plotly_white',
-        text=round(select_chart[G1], 3)
-    )
-    fig_time_chart.update_layout(
-        # xaxis=dict(tickmode='linear'),
-        plot_bgcolor='rgba(0,0,0,0)',
-        yaxis=(dict(showgrid=False))
-    )
-
-    st.plotly_chart(fig_time_chart)
