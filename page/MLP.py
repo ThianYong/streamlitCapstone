@@ -233,6 +233,7 @@ def app():
         )
     )
 
+
     fig.update_layout(
         # xaxis=dict(tickmode='linear'),
         plot_bgcolor='rgba(0,0,0,0)',
