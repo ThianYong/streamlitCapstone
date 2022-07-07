@@ -191,16 +191,21 @@ def app():
         df_selection.groupby(by=['J'])[[G1]]
     )
 
+    # st.write(error_chart)
+    # st.write(error_chart.describe())
+    # st.write('Selected Data :' + G1 )
 
-    st.write('Selected Data :' + G1 )
     col21, col22 = st.columns(2)
     with col21:
 
         st.write(
             'Select Chart: '
         )
-        st.dataframe(select_chart)
+        st.dataframe(select_chart) #mean
 
+    error_chart_mean = error_chart.mean()[G1].tolist()
+    error_chart_min = error_chart.min()[G1].tolist()
+    error_chart_max = error_chart.max()[G1].tolist()
     error_chart = error_chart.mean()[G1]
 
     error_chart = pd.DataFrame(error_chart)
@@ -211,25 +216,37 @@ def app():
         st.write(
             'Error Chart: '
         )
-        st.dataframe(error_chart)
+        st.dataframe(error_chart) #mean
 
-    error_x = error_chart['J'].tolist()
-    error_y = error_chart[G1].tolist()
+    error_chart_x = error_chart['J'].tolist()
+    error_chart_y = error_chart_mean
 
-    # st.write(error_x)
-    # st.write(error_y)
 
-    valueError = 25
+    valueError = 1
+    '''
+    x = J 
+    y = mid point is the mean
+    array =  is the max value
+    arrayminus =  is the min value
+    '''
+
+    # st.write(error_chart_x)
+    # st.write(error_chart_y)
+    # st.write('array :', error_chart_max)
+    # st.write('arrayminus :', error_chart_min)
 
     st.write('Value of Error :', valueError, '%')
     fig = go.Figure(
         data=go.Scatter(
-            x=error_x,
-            y=error_y,
+            x=error_chart_x,
+            y=error_chart_y,
             error_y=dict(
-                type='percent', #  value of error bar given as percentage of y value
-                value=valueError,
-                visible=True),
+                type='data', #'percent', #  value of error bar given as percentage of y value
+                symmetric = False,
+                array = error_chart_max,
+                arrayminus = error_chart_min,)
+                # value=valueError,
+                # visible=True),
         )
     )
 
