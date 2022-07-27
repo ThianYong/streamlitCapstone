@@ -3,9 +3,9 @@ from PIL import Image
 from streamlit_option_menu import option_menu
 
 # Custom imports
-from page import overview, home, RBM, MLP, hardware, contacts
+from page import overview, home, IsingJ1J2, Ising, hardware, contacts
 
-# st.set_page_config(layout="wide") # set layout to wide for all page
+# st.set_page_config(layout= "wide") # set layout to wide for all page
 st.set_page_config(page_title='NUS Capstone 2022', page_icon=':panda_face:') # set the name of the page
 
 # Customised the Streamlit Page
@@ -43,7 +43,7 @@ with st.sidebar:
 with st.sidebar:
     selected = option_menu(
         menu_title='Main Menu',
-        options=['Home', 'Overview', 'Hardware', 'RBM', 'MLP', 'Contact Us'],
+        options=['Home', 'Overview', 'Hardware', 'Ising J1-J2', 'Ising', 'Contact Us'],
         icons = ['house', 'eyeglasses', 'pc-display-horizontal', 'file-bar-graph', 'file-bar-graph-fill', 'envelope'],
         menu_icon='cast',
         default_index=0
@@ -64,10 +64,10 @@ if selected == 'Contact Us':
 
 if selected == 'Overview':
     overview.app()
-if selected == 'RBM':
-    RBM.app()
-if selected == 'MLP':
-    MLP.app()
+if selected == 'Ising J1-J2':
+    IsingJ1J2.app()
+if selected == 'Ising':
+    Ising.app()
     
 
 
