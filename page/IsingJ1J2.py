@@ -13,7 +13,7 @@ def app():
     with st.container():
         col11, col12, col13 = st.columns(3)
         with col11:
-            st.metric('J2', "-5.0 to 5.0")
+            st.metric('J1/J2', "+1 to -1/-5.0 to 5.0")
             st.metric('H', "1")
 
         with col12:
