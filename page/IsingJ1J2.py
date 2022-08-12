@@ -24,53 +24,48 @@ def app():
             st.metric('Stopping Threshold', '0.005')
     st.write('---')
 
-    st.header('Please Filter Data Here:')
-    # ---- Select The model ---- ##
-    option = st.selectbox(
-        'Select the Model Type: ',
-        ('MLP', 'RBM'))
-    # st.write('You selected:', option)
-
 
     @st.cache  ### use cache to buffer the data. Improve loading time.
     def get_data(filename):
         return pd.read_csv(filename)
+
+    ### --- SideBar --- ###
+    st.sidebar.header('Please Filter Data Here:')
+
+    option = st.sidebar.selectbox(
+        'Select the Model Type: ',
+        ('MLP', 'RBM'))
 
     if option == 'MLP':
         df = get_data('data/RBM_J1J2_combined.csv')
     else:
         df = get_data('data/RBM_J1J2_combined.csv')
 
+    length = st.sidebar.radio(
+        'Select the Length:',
+        options=df['Length'].unique(),
+        # default=4
+    )
 
-    ### --- uncomment this part of do not want the selection to be on the sidebar ---#
-    col1, col2, col3 = st.columns([0.6,0.1, 0.3])
+    J1 = st.sidebar.selectbox(
+        'Select the J value: ',
+        options=df['J1'].unique()
+    )
 
-    with col1:
-        Col_Y_Select = st.selectbox(
-            'Select the Graph to be Plotted:',
-            # options=df.columns,
-            options = ['Epoch', 'Time', 'Energy-Std', 'Cz-Ferro', 'Cz-Antiferro', 'Mz2-Ferro', 'Mz2-Antiferro', 'Mx-Ferro', 'Nz-Ferro', 'Nz-Antiferro', 'Std_Mean' ]
-        )
-        J2 = st.slider(
+
+    J2 = st.sidebar.slider(
         'Select the J2:',
         min_value=min(df['J2'].unique()),
         max_value=max(df['J2'].unique()),
         value=(-5.0, -4.5),
         step=0.1
-        )
+    )
 
-
-    with col3:
-        J1 = st.selectbox(
-            'Select the J value: ',
-            options=df['J1'].unique()
-        )
-
-        length = st.radio(
-            'Select the Length:',
-            options=df['Length'].unique(),
-            # default=4
-        )
+    Col_Y_Select = st.sidebar.selectbox(
+        'Select the Graph to be Plotted:',
+        # options=df.columns,
+        options = ['Epoch', 'Time', 'Energy-Std', 'Cz-Ferro', 'Cz-Antiferro', 'Mz2-Ferro', 'Mz2-Antiferro', 'Mx-Ferro', 'Nz-Ferro', 'Nz-Antiferro', 'Std_Mean' ]
+    )
 
     st.write('---')
 
@@ -81,7 +76,6 @@ def app():
     df_selection = df.query(
         'Length == @length & J1 == @J1 & J2==@J2'
     )
-
 
 
     # ---- Dashboard ---- #
