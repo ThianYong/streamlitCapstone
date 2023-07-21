@@ -7,4 +7,4 @@ numpy
 st-annotated-text
 plotly
 streamlit-option-menu
-streamlit_lottie
+streamlit_lottie==0.0.3
